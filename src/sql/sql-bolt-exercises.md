@@ -190,7 +190,6 @@
    * Name A string (text) describing the name of the database
    * Version A number (floating point) of the latest version of this database
    * Download_count An integer count of the number of times this database was downloaded<br>
-   
 This table has no constraints.<br>
    ``DCREATE table Database(id INTEGER PRIMMARY KEY, Name TEXT, Version DOUBLE, Download_count INTEGER);``<br>
 ---
