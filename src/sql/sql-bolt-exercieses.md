@@ -87,3 +87,24 @@
 3. List all the movies by their ratings in descending order<br>
    ``SELECT title FROM movies INNER JOIN boxoffice ON Boxoffice.Movie_id = Movies.Id ORDER BY rating DESC;``<br>
 ---
+
+## Exercise 7
+
+1. Find the list of all buildings that have employees<br>
+   ``SELECT DISTINCT building FROM employees;``<br>
+---
+2. Find the list of all buildings and their capacity<br>
+   ``SELECT building_name,capacity FROM buildings;``<br>
+---
+3. List all buildings and the distinct employee roles in each building (including empty buildings)<br>
+   ``SELECT DISTINCT building_name, employees.role FROM buildings LEFT JOIN employees ON buildings.building_name = employees.building;``<br>
+---
+
+## Exercise 8
+
+1. Find the name and role of all employees who have not been assigned to a building<br>
+   ``SELECT name, role FROM employees WHERE building IS NULL;``<br>
+---
+2. Find the names of the buildings that hold no employees<br>
+   ``SELECT building_name FROM buildings LEFT JOIN employees ON buildings.building_name = employees.building WHERE employees.building IS NULL;``<br>
+---
