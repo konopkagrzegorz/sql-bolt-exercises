@@ -58,4 +58,32 @@
 4. List the next five Pixar movies sorted alphabetically<br>
    ``SELECT * FROM movies ORDER BY title ASC LIMIT 5 OFFSET 5;``<br>
 ---
-   
+
+## Review 1 (Exercise 5)
+
+1. List all the Canadian cities and their populations<br>
+   ``SELECT city,population FROM north_american_cities WHERE country = "Canada";``<br>
+---
+2. Order all the cities in the United States by their latitude from north to south<br>
+   ``SELECT * FROM north_american_cities WHERE country = "United States" ORDER BY Latitude DESC;``<br>
+---
+3. List all the cities west of Chicago, ordered from west to east<br>
+   ``SELECT * FROM north_american_cities WHERE longitude < -87.629798 ORDER BY longitude;``<br>
+---
+4. List the two largest cities in Mexico (by population)<br>
+   ``SELECT * FROM north_american_cities WHERE country = "Mexico" ORDER BY population DESC LIMIT 2;``<br>
+---
+5. List the third and fourth largest cities (by population) in the United States and their population<br>
+   ``SELECT * FROM north_american_cities WHERE country = "United States" ORDER BY population DESC LIMIT 2 OFFSET 2;``<br>
+---
+## Exercise 6
+
+1. Find the domestic and international sales for each movie<br>
+   ``SELECT Movies.title, Boxoffice.domestic_sales, Boxoffice.international_sales FROM Boxoffice INNER JOIN movies ON Boxoffice.Movie_id = Movies.Id;``<br>
+---
+2. Show the sales numbers for each movie that did better internationally rather than domestically<br>
+   ``SELECT Movies.title, Boxoffice.domestic_sales, Boxoffice.international_sales FROM Boxoffice INNER JOIN movies ON Boxoffice.Movie_id = Movies.Id WHERE domestic_sales < international_sales;``<br>
+---
+3. List all the movies by their ratings in descending order<br>
+   ``SELECT title FROM movies INNER JOIN boxoffice ON Boxoffice.Movie_id = Movies.Id ORDER BY rating DESC;``<br>
+---
