@@ -108,3 +108,107 @@
 2. Find the names of the buildings that hold no employees<br>
    ``SELECT building_name FROM buildings LEFT JOIN employees ON buildings.building_name = employees.building WHERE employees.building IS NULL;``<br>
 ---
+
+## Exercise 9
+
+1. List all movies and their combined sales in millions of dollars<br>
+   ``SELECT title, (domestic_sales + international_sales)/1000000 AS sales FROM movies INNER JOIN boxoffice ON movies.id = boxoffice.movie_id;``<br>
+---
+2. List all movies and their ratings in percent<br>
+   ``SELECT title, rating*10 AS ratings_precent FROM movies INNER JOIN boxoffice ON movies.id = boxoffice.movie_id;``<br>
+---
+3. List all movies that were released on even number years<br>
+   ``SELECT * FROM movies INNER JOIN boxoffice ON movies.id = boxoffice.movie_id WHERE movies.year % 2 = 0;``<br>
+---
+
+## Exercise 10
+
+1. Find the longest time that an employee has been at the studio<br>
+   ``SELECT MAX(years_employed) FROM employees;``<br>
+---
+2. For each role, find the average number of years employed by employees in that role<br>
+   ``SELECT role, AVG(years_employed) FROM employees GROUP BY role;``<br>
+---
+3. Find the total number of employee years worked in each building<br>
+   ``SELECT building,SUM(years_employed) FROM employees GROUP BY building;``<br>
+---
+
+## Exercise 11
+
+1. Find the number of Artists in the studio (without a HAVING clause)<br>
+   ``SELECT COUNT(*) FROM employees WHERE ROLE = "Artist";``<br>
+---
+2. Find the number of Employees of each role in the studio<br>
+   ``SELECT role,COUNT(*) AS number FROM employees GROUP BY role;``<br>
+---
+3. Find the total number of years employed by all Engineers<br>
+   ``SELECT role, SUM(years_employed) AS number FROM employees GROUP BY role HAVING role = "Engineer";``<br>
+---
+
+## Exercise 12
+
+1. Find the number of movies each director has directed<br>
+   ``SELECT director,COUNT(*) AS number FROM movies GROUP BY director;``<br>
+---
+2. Find the total domestic and international sales that can be attributed to each director<br>
+   ``SELECT role,COUNT(*) AS number FROM employees GROUP BY role;``<br>
+---
+
+## Exercise 13
+
+1. Add the studio's new production, Toy Story 4 to the list of movies (you can use any director)<br>
+   ``INSERT INTO movies(title,director,year,length_minutes) VALUES("Toy Story 4", "John Lasseter", 2020, 90);``<br>
+---
+2. Toy Story 4 has been released to critical acclaim!<br>It had a rating of 8.7, and made 340 million domestically and 270 million internationally.<br>Add the record to the BoxOffice table.<br>
+   ``INSERT INTO boxoffice (movie_id,rating,domestic_sales,international_sales) VALUES (15,8.7,340000000,270000000);``<br>
+---
+
+## Exercise 14
+
+1. The director for A Bug's Life is incorrect, it was actually directed by John Lasseter<br>
+   ``UPDATE movies SET director = "John Lasseter" WHERE title = "A Bug's Life";``<br>
+---
+2. The year that Toy Story 2 was released is incorrect, it was actually released in 1999<br>
+   ``UPDATE movies SET year = 1999 WHERE title = "Toy Story 2";``<br>
+---
+3. Both the title and director for Toy Story 8 is incorrect! The title should be "Toy Story 3" and it was directed by Lee Unkrich<br>
+   ``UPDATE movies SET director = "Lee Unkrich", title = "Toy Story 3" WHERE title = "Toy Story 8";``<br>
+---
+
+## Exercise 15
+
+1. This database is getting too big, lets remove all movies that were released before 2005.<br>
+   ``DELETE FROM movies WHERE year < 2005;``<br>
+---
+2. Andrew Stanton has also left the studio, so please remove all movies directed by him.<br>
+   ``DELETE FROM movies WHERE director = "Andrew Stanton";``<br>
+---
+
+## Exercise 16
+
+1. Create a new table named Database with the following columns:
+   * Name A string (text) describing the name of the database
+   * Version A number (floating point) of the latest version of this database
+   * Download_count An integer count of the number of times this database was downloaded<br>
+   
+This table has no constraints.<br>
+   ``DCREATE table Database(id INTEGER PRIMMARY KEY, Name TEXT, Version DOUBLE, Download_count INTEGER);``<br>
+---
+
+## Exercise 17
+
+1. Add a column named Aspect_ratio with a FLOAT data type to store the aspect-ratio each movie was released in.<br>
+   ``ALTER TABLE movies ADD column aspect_ratio FLOAT;``<br>
+---
+2. Add another column named Language with a TEXT data type to store the language that the movie was released in. Ensure that the default for this language is English.<br>
+   ``ALTER TABLE movies ADD column Language TEXT default "English";``<br>
+---
+
+## Exercise 18
+
+1. We've sadly reached the end of our lessons, lets clean up by removing the Movies table<br>
+   ``DROP TABLE movies;``<br>
+---
+2. And drop the BoxOffice table as well<br>
+   ``DROP TABLE BoxOffice;``<br>
+---
